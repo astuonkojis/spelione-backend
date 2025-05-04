@@ -1,11 +1,11 @@
-const pool = require('./db');
-const bcrypt = require('bcryptjs'); // <-- Pakeista iš 'bcrypt'
+const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const sendNewPassword = require('./middleware/sendEmail');
 require('dotenv').config();
 
 module.exports = {
   register: async function (req, res) {
+    const pool = req.app.locals.pool;
     const { name, surname, email, password, group_name } = req.body;
 
     if (!name || !surname || !email || !password || !group_name) {
@@ -41,6 +41,7 @@ module.exports = {
   },
 
   login: async function (req, res) {
+    const pool = req.app.locals.pool;
     const { email, password } = req.body;
 
     try {
@@ -87,6 +88,7 @@ module.exports = {
   },
 
   forgotPassword: async function (req, res) {
+    const pool = req.app.locals.pool;
     const { email } = req.body;
 
     try {
@@ -113,6 +115,7 @@ module.exports = {
   },
 
   changePassword: async function (req, res) {
+    const pool = req.app.locals.pool;
     const { email, oldPassword, newPassword } = req.body;
 
     if (!email || !oldPassword || !newPassword) {
