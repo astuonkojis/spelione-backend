@@ -1,5 +1,5 @@
 const pool = require('./db');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs'); // <-- Pakeista iš 'bcrypt'
 const jwt = require('jsonwebtoken');
 const sendNewPassword = require('./middleware/sendEmail');
 require('dotenv').config();
